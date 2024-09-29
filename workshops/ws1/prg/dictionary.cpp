@@ -17,6 +17,20 @@ namespace seneca {
         return PartOfSpeech::Unknown;
     }
 
+	std::string convertPosToString(PartOfSpeech pos) {
+		switch (pos) {
+		case PartOfSpeech::Noun: return "Noun";
+		case PartOfSpeech::Adverb: return "Adverb";
+		case PartOfSpeech::Adjective: return "Adjective";
+		case PartOfSpeech::Verb: return "Verb";
+		case PartOfSpeech::Preposition: return "Preposition";
+		case PartOfSpeech::Pronoun: return "Pronoun";
+		case PartOfSpeech::Conjunction: return "Conjunction";
+		case PartOfSpeech::Interjection: return "Interjection";
+		default: return "";
+		}
+	}
+
     Dictionary::Dictionary(const char* filename) {
         if (filename == nullptr) {
             std::cerr << "Error: Null filename provided.\n";
@@ -87,17 +101,17 @@ namespace seneca {
         file.clear();
         file.seekg(0);
         m_words = new Word[m_size];
-        size_t index = 0;
+        size_t i = 0;
         while (std::getline(file, line)) {
             std::istringstream iss(line);
-            std::string word, definition, posString;
+            std::string word, posString, definition;
             std::getline(iss, word, ',');
-            std::getline(iss, definition, ',');
             std::getline(iss, posString, ',');
-            m_words[index].m_word = word;
-            m_words[index].m_definition = definition;
-            m_words[index].m_pos = parsePartOfSpeech(posString);
-            ++index;
+            std::getline(iss, definition, ',');
+            m_words[i].m_word = word;
+            m_words[i].m_pos = convertPosToString(parsePartOfSpeech(posString));
+            m_words[i].m_definition = definition;
+            ++i;
         }
     }
 
@@ -112,8 +126,8 @@ namespace seneca {
                 else {
                     std::cout << std::string(m_words[i].m_word.size(), ' ');
                 }
-                if (g_settings.m_verbose && m_words[i].m_pos != PartOfSpeech::Unknown) {
-                    std::cout << " - (" << static_cast<int>(m_words[i].m_pos) << ") ";
+                if (g_settings.m_verbose && m_words[i].m_pos != "") {
+                    std::cout << " - (" << m_words[i].m_pos << ") ";
                 }
                 else {
                     std::cout << " - ";

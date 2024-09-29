@@ -17,8 +17,9 @@ namespace seneca {
     struct Word {
         std::string m_word{};
         std::string m_definition{};
-        PartOfSpeech m_pos = PartOfSpeech::Unknown;
+        std::string m_pos = "";
     };
+
     class Dictionary {
         Word* m_words{ nullptr };
         size_t m_size{ 0 };
