@@ -107,7 +107,7 @@ namespace seneca {
             std::string word, posString, definition;
             std::getline(iss, word, ',');
             std::getline(iss, posString, ',');
-            std::getline(iss, definition, ',');
+            std::getline(iss, definition, '\n');
             m_words[i].m_word = word;
             m_words[i].m_pos = convertPosToString(parsePartOfSpeech(posString));
             m_words[i].m_definition = definition;
