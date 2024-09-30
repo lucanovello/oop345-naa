@@ -1,3 +1,9 @@
+/////////////////////////////
+//  Luca Novello
+//  038515003
+//  gnovello@myseneca.ca
+//  Sept 24 2024
+/////////////////////////////
 #ifndef SENECA_LOGGER_H
 #define SENECA_LOGGER_H
 #include "event.h"
