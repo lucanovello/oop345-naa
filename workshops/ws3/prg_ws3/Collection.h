@@ -10,15 +10,10 @@
 #include <iostream>
 #include <cctype>
 #include <memory>
+#include "mediaItem.h"
 
 namespace seneca {
 
-    class MediaItem {
-    public:
-        virtual const std::string& title() const = 0;
-        virtual const std::string& summary() const = 0;
-        virtual ~MediaItem() = default;
-    };
 
     class Collection {
         std::string m_name;

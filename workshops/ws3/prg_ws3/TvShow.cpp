@@ -62,7 +62,7 @@ namespace seneca {
 
     TvShow* TvShow::createItem(const std::string& strShow) {
         if (strShow.empty() || strShow[0] == '#') {
-            throw std::invalid_argument("Not a valid show.");
+            throw "Not a valid show.";
         }
 
         std::istringstream stream(strShow);
@@ -82,52 +82,6 @@ namespace seneca {
         return new TvShow(id, title, year, summary);
     }
 
-    template <typename Collection_t>
-    void TvShow::addEpisode(Collection_t& col, const std::string& strEpisode) {
-        if (strEpisode.empty() || strEpisode[0] == '#') {
-            throw std::invalid_argument("Not a valid episode.");
-        }
-
-        std::istringstream stream(strEpisode);
-        std::string id, numOverallStr, seasonStr, numInSeasonStr, airDate, lengthStr, title, summary;
-
-        std::getline(stream, id, ',');
-        trim(id);
-        auto it = std::find_if(col.begin(), col.end(), [&](const MediaItem* item) {
-            return dynamic_cast<const TvShow*>(item)->m_id == id;
-            });
-
-        if (it == col.end()) {
-            throw std::invalid_argument("Show not found.");
-        }
-
-        const TvShow* show = dynamic_cast<const TvShow*>(*it);
-
-        std::getline(stream, numOverallStr, ',');
-        std::getline(stream, seasonStr, ',');
-        std::getline(stream, numInSeasonStr, ',');
-        std::getline(stream, airDate, ',');
-        std::getline(stream, lengthStr, ',');
-        std::getline(stream, title, ',');
-        std::getline(stream, summary);
-
-        trim(numOverallStr);
-        trim(seasonStr);
-        trim(numInSeasonStr);
-        trim(airDate);
-        trim(lengthStr);
-        trim(title);
-        trim(summary);
-
-        unsigned short numOverall = static_cast<unsigned short>(std::stoi(numOverallStr));
-        unsigned short season = seasonStr.empty() ? 1 : static_cast<unsigned short>(std::stoi(seasonStr));
-        unsigned short numInSeason = static_cast<unsigned short>(std::stoi(numInSeasonStr));
-        unsigned int length = static_cast<unsigned int>(std::stoi(lengthStr));
-
-        TvEpisode episode{ show, numOverall, season, numInSeason, airDate, length, title, summary };
-        const_cast<TvShow*>(show)->m_episodes.push_back(episode);
-    }
-
     double TvShow::getEpisodeAverageLength() const {
         if (m_episodes.empty()) return 0.0;
 
@@ -137,10 +91,18 @@ namespace seneca {
 
     std::list<std::string> TvShow::getLongEpisodes() const {
         std::list<std::string> longEpisodes;
-        std::copy_if(m_episodes.begin(), m_episodes.end(), std::back_inserter(longEpisodes),
-            [](const TvEpisode& ep) { return ep.m_length >= 3600; });
+        for (const auto& ep : m_episodes) {
+            if (ep.m_length >= 3600) {
+                longEpisodes.push_back(ep.m_title); 
+            }
+        }
 
         return longEpisodes;
+    }
+
+    std::ostream& operator<<(std::ostream& out, const TvShow& show) {
+		show.display(out);
+        return out;
     }
 
 } // namespace seneca

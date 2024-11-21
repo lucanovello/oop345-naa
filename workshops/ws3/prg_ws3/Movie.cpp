@@ -41,7 +41,7 @@ namespace seneca {
 
     Movie* Movie::createItem(const std::string& strMovie) {
         if (strMovie.empty() || strMovie[0] == '#') {
-            throw std::invalid_argument("Not a valid movie.");
+            throw "Not a valid movie.";
         }
 
         std::istringstream stream(strMovie);
@@ -49,10 +49,10 @@ namespace seneca {
 
         std::getline(stream, title, ',');
         trim(title);
-        std::getline(stream, summary);
-        trim(summary);
         std::getline(stream, yearStr, ',');
         trim(yearStr);
+        std::getline(stream, summary);
+        trim(summary);
 
         unsigned short year = static_cast<unsigned short>(std::stoi(yearStr));
 

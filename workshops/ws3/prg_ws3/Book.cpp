@@ -43,7 +43,7 @@ namespace seneca {
 
     Book* Book::createItem(const std::string& strBook) {
         if (strBook.empty() || strBook[0] == '#') {
-            throw std::invalid_argument("Not a valid book.");
+            throw "Not a valid book.";
         }
 
         std::istringstream stream(strBook);
@@ -57,10 +57,10 @@ namespace seneca {
         trim(country);
         std::getline(stream, priceStr, ',');
         trim(priceStr);
-        std::getline(stream, summary);
-        trim(summary);
         std::getline(stream, yearStr, ',');
         trim(yearStr);
+        std::getline(stream, summary);
+        trim(summary);
 
         double price = std::stod(priceStr);
         unsigned short year = static_cast<unsigned short>(std::stoi(yearStr));
