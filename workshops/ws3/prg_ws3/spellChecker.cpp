@@ -1,4 +1,4 @@
-#include "SpellChecker.h"
+#include "spellChecker.h"
 
 namespace seneca {
 

@@ -5,7 +5,7 @@
 #include <iomanip>
 #include <sstream>
 #include "mediaItem.h"
-#include "Settings.h"
+#include "settings.h"
 
 namespace seneca {
 

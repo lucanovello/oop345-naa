@@ -2,7 +2,7 @@
 #include <sstream>
 #include <algorithm>
 #include <numeric>
-#include "TvShow.h"
+#include "tvShow.h"
 
 namespace seneca {
 
