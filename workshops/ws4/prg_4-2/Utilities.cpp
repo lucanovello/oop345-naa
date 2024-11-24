@@ -35,6 +35,7 @@ namespace seneca {
         token.erase(token.find_last_not_of(" \t") + 1);
 
         if (token.empty()) {
+            more = false;
             throw "No token found!";
         }
         if (m_widthField < token.length()) {

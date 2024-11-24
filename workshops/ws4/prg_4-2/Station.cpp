@@ -55,7 +55,7 @@ namespace seneca {
 			<< std::setw(6) << std::setfill('0') << std::right << m_serialNumber << " | ";
 
 		if (full) {
-			os << std::setw(4) << m_qtyInStock << " | "
+			os << std::setw(4) << std::setfill(' ') << m_qtyInStock << " | "
 				<< m_desc;
 		}
 
