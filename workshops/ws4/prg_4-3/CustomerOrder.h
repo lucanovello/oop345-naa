@@ -17,12 +17,10 @@ namespace seneca {
 	};
 
 	class CustomerOrder {
-
 		std::string m_name{ "" };
 		std::string m_product{ "" };
 		size_t m_cntItem{ 0 };
 		Item** m_lstItem{ nullptr };
-
 		static size_t m_widthField;
 	public:
 		CustomerOrder() = default;
@@ -39,6 +37,5 @@ namespace seneca {
 	};
 
 } // namespace seneca	
-
 
 #endif // !SENECA_CUSTOMERORDER_H

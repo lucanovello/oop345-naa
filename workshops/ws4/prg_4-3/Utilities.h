@@ -15,8 +15,8 @@ namespace seneca {
 		std::string extractToken(const std::string& str, size_t& next_pos, bool& more);
 		static void setDelimiter(char newDelimiter);
 		const static char getDelimiter();
-
 	};
 
 } // namespace seneca
+
 #endif // !SENECA_UTILITIES_H

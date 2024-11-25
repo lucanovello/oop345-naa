@@ -9,7 +9,6 @@ namespace seneca {
 	size_t Station::m_widthField = 0;
 	size_t Station::id_generator = 0;
 
-
 	Station::Station(const std::string& str) {
 		Utilities util;
 		size_t next_pos = 0;
@@ -53,12 +52,10 @@ namespace seneca {
 		os << std::setw(3) << std::right << std::setfill('0') << m_id << " | "
 			<< std::setw(m_widthField) << std::setfill(' ') << std::left << m_name << " | "
 			<< std::setw(6) << std::setfill('0') << std::right << m_serialNumber << " | ";
-
 		if (full) {
 			os << std::setw(4) << std::setfill(' ') << m_qtyInStock << " | "
 				<< m_desc;
 		}
-
 		os << std::endl;
 	}
 

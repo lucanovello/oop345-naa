@@ -22,12 +22,10 @@ namespace seneca {
             util.extractToken(record, temp_pos, more);
             m_cntItem++;
         }
-
         m_lstItem = new Item*[m_cntItem];
         for (size_t i = 0; i < m_cntItem; ++i) {
             m_lstItem[i] = new Item(util.extractToken(record, next_pos, more));
         }
-
         if (m_widthField < util.getFieldWidth()) {
             m_widthField = util.getFieldWidth();
         }
@@ -86,17 +84,17 @@ namespace seneca {
         for (size_t i = 0; i < m_cntItem; ++i) {
             if (m_lstItem[i]->m_itemName == station.getItemName() && !m_lstItem[i]->m_isFilled) {
                 if (station.getQuantity() > 0) {
-                    station.updateQuantity();
                     m_lstItem[i]->m_serialNumber = station.getNextSerialNumber();
                     m_lstItem[i]->m_isFilled = true;
+                    station.updateQuantity();
                     os << "    Filled " << m_name << ", " << m_product
                         << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
+                    break;
                 }
                 else {
                     os << "    Unable to fill " << m_name << ", " << m_product
                         << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
                 }
-                break;
             }
         }
     }
